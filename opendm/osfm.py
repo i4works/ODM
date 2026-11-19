@@ -278,13 +278,15 @@ class OSFMContext:
             if args.camera_lens != 'auto':
                 config.append("camera_projection_type: %s" % args.camera_lens.upper())
 
-            matcher_type = args.matcher_type
+            matcher_type = args.matcher_type.replace("-", "_").lower()
             feature_type = args.feature_type.upper()
 
             osfm_matchers = {
                 "bow": "WORDS",
                 "flann": "FLANN",
-                "bruteforce": "BRUTEFORCE"
+                "bruteforce": "BRUTEFORCE",
+                "opencl_bf": "OPENCL_BF",
+                "opencl_hamming": "OPENCL_HAMMING",
             }
 
             if not has_gps and not 'matcher_type_is_set' in args:

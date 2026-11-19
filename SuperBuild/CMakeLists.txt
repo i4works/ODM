@@ -184,7 +184,7 @@ if (WIN32)
     set (POISSON_BIN_PATH "x64/${CMAKE_BUILD_TYPE}/PoissonRecon.exe")
 else()
     # Inherit pixi/conda compiler flags (LDFLAGS for -ljpeg, etc.) from the shell environment.
-    set (POISSON_BUILD_CMD bash -lc "make -j${nproc} poissonrecon")
+    set (POISSON_BUILD_CMD bash -lc "make -j${nproc} poissonrecon CONDA_PREFIX=$ENV{CONDA_PREFIX}")
     set (POISSON_BIN_PATH "Linux/PoissonRecon")
     if (APPLE)
         set(POISSON_BUILD_CMD bash -lc "make -j${nproc} -f Makefile.macos poissonrecon COMPILER=${CMAKE_CXX_COMPILER} CONDA_PREFIX=$ENV{CONDA_PREFIX}")
@@ -201,6 +201,7 @@ externalproject_add(poissonrecon
                           ${SB_ROOT_DIR}/cmake/poissonrecon-zlib-byte.patch
                           ${SB_ROOT_DIR}/cmake/poissonrecon-png-mac.patch
                           ${SB_ROOT_DIR}/cmake/poissonrecon-macos-makefile.patch
+                          ${SB_ROOT_DIR}/cmake/poissonrecon-linux-ldflags.patch
     CONFIGURE_COMMAND ""
     BUILD_IN_SOURCE 1
     BUILD_COMMAND    ${POISSON_BUILD_CMD}

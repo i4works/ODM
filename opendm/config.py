@@ -249,8 +249,8 @@ def config(argv=None, parser=None):
                         metavar='<string>',
                         action=StoreValue,
                         default='flann',
-                        choices=['bow', 'bruteforce', 'flann'],
-                        help=('Matcher algorithm, Fast Library for Approximate Nearest Neighbors or Bag of Words. FLANN is slower, but more stable. BOW is faster, but can sometimes miss valid matches. BRUTEFORCE is very slow but robust.'
+                        choices=['bow', 'bruteforce', 'flann', 'opencl_bf', 'opencl_hamming'],
+                        help=('Matcher algorithm, Fast Library for Approximate Nearest Neighbors, Bag of Words, BruteForce, or OpenCL GPU accelerated matchers. FLANN is slower, but more stable. BOW is faster, but can sometimes miss valid matches. BRUTEFORCE is very slow but robust. OPENCL_HAMMING uses online binary projection trained batched OpenCL matching on GPU. OPENCL_BF uses OpenCL brute-force matching. '
                             'Can be one of: %(choices)s. Default: '
                             '%(default)s'))
 

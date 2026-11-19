@@ -1,0 +1,19 @@
+diff --git a/Makefile b/Makefile
+index f1f3441..7a41eda 100644
+--- a/Makefile
++++ b/Makefile
+@@ -20,12 +20,12 @@ COMPILER ?= gcc
+ 
+ ifeq ($(COMPILER),gcc)
+ 	CFLAGS += -fopenmp -Wno-deprecated -std=c++14 -pthread -Wno-invalid-offsetof
+-	LFLAGS += -lgomp -lstdc++ -lpthread
++	LFLAGS += -lgomp -lstdc++ -lpthread $(LDFLAGS) $(if $(CONDA_PREFIX),-L$(CONDA_PREFIX)/lib)
+ else
+ # 	CFLAGS += -fopenmp=libiomp5 -Wno-deprecated -Wno-write-strings -std=c++14 -Wno-invalid-offsetof
+ # 	LFLAGS += -liomp5 -lstdc++
+ 	CFLAGS += -Wno-deprecated -std=c++14 -pthread -Wno-invalid-offsetof -Wno-dangling-else
+-	LFLAGS += -lstdc++
++	LFLAGS += -lstdc++ $(LDFLAGS) $(if $(CONDA_PREFIX),-L$(CONDA_PREFIX)/lib)
+ endif
+ #LFLAGS += -lz -lpng -ljpeg
+ 
